@@ -251,14 +251,18 @@ def serve(channel):
 def main():
     """Main function"""
     args = parser.parse_args()
-    url = 'http://' + args.host + ':' + args.port
+    if args.link is None:
+        url = 'http://' + args.host + ':' + args.port
+    else:
+        url = 'http://' + args.link + ':' + args.port
     channel = Channel(
         root_dir=path.abspath(args.directory),
         root_url=url,
         host=args.host,
         port=args.port,
         title=args.title,
-        link=args.link,
+        # link=args.link,
+        link=None,
         debug=args.debug,
     )
     if args.action == 'generate':
