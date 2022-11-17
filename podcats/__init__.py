@@ -270,7 +270,8 @@ def main():
     args = parser.parse_args()
     url = 'http://' if args.cert is None else 'https://'
     url += args.host if args.link is None else args.link
-    url += ':' + args.port
+    if not re.findall(':[0-9]+', url):
+        url += ':' + args.port
     channel = Channel(
         root_dir=path.abspath(args.directory),
         root_url=url,
